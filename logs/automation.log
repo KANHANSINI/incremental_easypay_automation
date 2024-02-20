@@ -1,0 +1,6 @@
+2024-02-01 10:50:36,343 - root - INFO - ********* Login with valid username and invalid password - Test Passed *********
+2024-02-01 10:50:36,343 - root - INFO - ********* Login with valid username and invalid password - Test Passed *********
+2024-02-01 10:50:51,610 - root - INFO - ********* Login with invalid username and valid password - Test Passed *********
+2024-02-01 10:50:51,610 - root - INFO - ********* Login with invalid username and valid password - Test Passed *********
+2024-02-01 10:51:04,234 - root - INFO - ********* Login with invalid username and invalid password - Test Passed *********
+2024-02-01 10:51:04,234 - root - INFO - ********* Login with invalid username and invalid password - Test Passed *********

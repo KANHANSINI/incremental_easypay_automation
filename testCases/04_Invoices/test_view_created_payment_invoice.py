@@ -1,0 +1,27 @@
+import allure
+from allure_commons.types import AttachmentType
+from self import self
+from pageObjects.InvoicesPage import InvoicesPage
+from pageObjects.LoginPage import LoginPage
+from utilities.custom_logger import LogGen
+from utilities.read_properties import ReadConfig
+from utilities.test_utils import sleep, SHORT_WAIT, perform_save_edit_invoice_assertion, MEDIUM_WAIT
+
+
+class TestViewInvoice:
+    base_url = ReadConfig.get_application_url(self)
+    username = ReadConfig.get_username()
+    password = ReadConfig.get_password()
+    logger = LogGen.loggen()
+
+    def test_view_created_payment_invoice(self, setup):
+        self.driver = setup
+        self.driver.get(self.base_url)
+        self.login = LoginPage(self.driver)
+        self.login.login_to_application(self.username, self.password)
+        sleep(MEDIUM_WAIT)
+        self.save_invoice_page = InvoicesPage(self.driver)
+        sleep(SHORT_WAIT)
+        self.save_invoice_page.invoice_action_view()
+        sleep(SHORT_WAIT)
+        self.driver.close()
