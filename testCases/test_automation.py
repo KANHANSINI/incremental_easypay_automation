@@ -19,6 +19,9 @@ from test_data.add_new_item_type_test_data import CreateNewItemTypeTestData, Edi
 from test_data.create_new_discount_test_data import SearchDiscountTestData
 from test_data.create_new_guest_test_data import CreateNewGuestTestData
 from test_data.create_new_payment_invoice_test_data import CreateNewPaymentInvoiceTestData
+from test_data.create_new_user_test_data import CreateNewUserTestData
+from test_data.email_logs_test_data import EmailLogsTestData
+from test_data.payment_logs_test_data import PaymentLogsTestData
 from test_data.room_type_test_data import AddNewRoomTypeTestData, EditRoomTypeTestData, SearchRoomTypeTestData
 from utilities.custom_logger import LogGen
 from utilities.read_properties import ReadConfig
@@ -140,6 +143,7 @@ class TestAutomation:
                                              CreateNewGuestTestData.address_line_1,
                                              CreateNewGuestTestData.address_line_2,
                                              CreateNewGuestTestData.zip_code)
+        sleep(MEDIUM_WAIT)
 
         # Add New Item
         self.add_item.click_items()
@@ -159,8 +163,8 @@ class TestAutomation:
         sleep(SHORT_WAIT)
         self.item_type.create_new_item_type(CreateNewItemTypeTestData.name, CreateNewItemTypeTestData.code)
         sleep(MEDIUM_WAIT)
-        self.item_type.edit_item_type(EditItemTypeTestData.name)
-        sleep(SHORT_WAIT)
+        # self.item_type.edit_item_type(EditItemTypeTestData.name)
+        # sleep(SHORT_WAIT)
         self.item_type.click_delete()
         sleep(SHORT_WAIT)
         # # self.terms.click_terms()
@@ -168,8 +172,6 @@ class TestAutomation:
         # # self.terms.add_new_term("abc", "efh", "dafgajhfa")
 
         # Add new discount
-        self.setup.click_setup()
-        sleep(SHORT_WAIT)
         self.discount.click_discount()
         sleep(SHORT_WAIT)
         self.discount.create_new_discount(AddNewDiscountTestData.name,
@@ -207,21 +209,23 @@ class TestAutomation:
         sleep(SHORT_WAIT)
         self.logs.click_email_logs()
         sleep(MEDIUM_WAIT)
-        self.logs.search_by_name("Nirant Sarin")
+        self.logs.search_by_name(EmailLogsTestData.name)
         sleep(MEDIUM_WAIT)
-        self.logs.search_by_invoice_date("2022-03-04")
+        self.logs.search_by_invoice_date(EmailLogsTestData.invoice_date)
         sleep(MEDIUM_WAIT)
-        self.logs.search_by_invoice_subject("Payment Failure - TESTRESRV02122020111")
+        self.logs.search_by_invoice_subject(EmailLogsTestData.invoice_subject)
         sleep(MEDIUM_WAIT)
+
+        # View payment logs
         self.logs.click_payment_logs()
         sleep(SHORT_WAIT)
-        self.logs.search_by_confirmation_number("TESTRESRV113221")
+        self.logs.search_by_confirmation_number(PaymentLogsTestData.confirmation_number)
         sleep(MEDIUM_WAIT)
-        self.logs.search_by_date("25-Jun-2019")
+        self.logs.search_by_date(PaymentLogsTestData.date)
         sleep(MEDIUM_WAIT)
-        self.logs.search_by_invoice_number_payment_log("Test1646764533558606")
+        self.logs.search_by_invoice_number_payment_log(PaymentLogsTestData.invoice_number)
         sleep(MEDIUM_WAIT)
-        self.logs.search_by_amount("504.00")
+        self.logs.search_by_amount(PaymentLogsTestData.amount)
         sleep(MEDIUM_WAIT)
 
         # Access invoice reports
@@ -266,5 +270,7 @@ class TestAutomation:
         sleep(SHORT_WAIT)
         self.access.click_users()
         sleep(SHORT_WAIT)
-        self.access.create_new_user("xeciyec104@ikuromi.com", "Maya Patel",
-                                    "test@1234", "test@1234")
+        self.access.create_new_user(CreateNewUserTestData.email,
+                                    CreateNewUserTestData.name,
+                                    CreateNewUserTestData.password,
+                                    CreateNewUserTestData.confirm_password)
